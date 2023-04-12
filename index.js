@@ -9,17 +9,17 @@ app.use(express.json());
 // Câu 1 : đã kết nối
 
 // Câu 2 :
-app.get('/get_orders',async (req,res) => {
-    const data = await prisma.orders.findMany({
+app.get('/get_customers',async (req,res) => {
+    const data = await prisma.customers.findMany({
         include : {
-            customers : true
+            orders : true
         }
     })
     res.json(data)
 })
 
 // Câu 3
-app.post('/get_order',async (req,res)=>{
+app.post('/get_orders',async (req,res)=>{
     const customerNumber = req.body.customerNumber
     const data = await prisma.orders.findMany({
         where: {

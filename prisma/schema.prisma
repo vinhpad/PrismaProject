@@ -21,7 +21,7 @@ model Customers {
   country                String?
   salesRepEmployeeNumber Int?
   creditLimit            Decimal?
-  Orders                 Orders[]
+  orders                 Orders[]
 
   @@map("customers")
 }
