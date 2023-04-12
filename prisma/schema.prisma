@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Customers {
+  customerNumber         Int      @id @default(autoincrement())
+  customerName           String?
+  contactLastName        String?
+  contactFirstName       String?
+  phone                  String?
+  addressLine1           String?
+  addressLine2           String?
+  city                   String?
+  state                  String?
+  postalCode             String?
+  country                String?
+  salesRepEmployeeNumber Int?
+  creditLimit            Decimal?
+  Orders                 Orders[]
+
+  @@map("customers")
+}
+
+model Orders {
+  orderNumber    Int        @id @default(autoincrement()) @map("orderNumber")
+  orderDate      DateTime?
+  requiredDate   DateTime?
+  shippedDate    DateTime?
+  status         String?
+  comments       String?
+  customerNumber Int?
+  customers      Customers? @relation(fields: [customerNumber], references: [customerNumber])
+
+  @@map("orders")
+}
